@@ -1,0 +1,378 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Revisar cortes · Estúdio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#000;--painel:#161618;--painel2:#1c1c1e;--txt:#f5f5f7;--sub:#8e8e93;--linha:rgba(255,255,255,.08);
+  --azul:#0a84ff;--ctl:rgba(255,255,255,.08);--ctl2:rgba(255,255,255,.14);--verm:#ff453a;--verde:#30d158}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.003em;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+header{display:flex;gap:12px;align-items:center;padding:12px 20px;background:rgba(22,22,24,.82);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--linha);flex:none}
+header h1{font-size:15px;font-weight:600;margin:0;letter-spacing:-.015em}
+.esp{flex:1}
+a.volta{color:var(--txt);text-decoration:none;background:var(--ctl);border-radius:8px;padding:6px 11px;font-size:13px}
+a.volta:hover{background:var(--ctl2)}
+.ic{width:16px;height:16px;flex:none;vertical-align:-3px}.ic.g{width:18px;height:18px}
+a.volta,header button{display:inline-flex;align-items:center;gap:6px}button.ico{padding:7px;gap:0}
+button{font:inherit;color:var(--txt);background:var(--ctl);border:0;border-radius:8px;padding:7px 12px;cursor:pointer;transition:background .15s}
+button:hover{background:var(--ctl2)}button.pri{background:#f5f5f7;color:#0a0a0a;font-weight:500}button.pri:hover{background:#fff}
+button:disabled{opacity:.45;cursor:default}
+#btBaixar{display:inline-flex;align-items:center;gap:6px;color:var(--txt);text-decoration:none;background:var(--ctl);border-radius:8px;padding:7px 12px;font-size:13px;transition:background .15s}
+#btBaixar:hover{background:var(--ctl2)}
+.palco{flex:1;display:flex;align-items:center;justify-content:center;padding:16px;min-height:0;background:#050505}
+video{max-height:100%;max-width:100%;border-radius:14px;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.barra{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:8px 20px;border-top:1px solid var(--linha);flex:none;font-size:13px}
+.barra .t{font-variant-numeric:tabular-nums;color:var(--sub);min-width:120px}
+.zoom{margin-left:auto;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.zoom label{color:var(--sub)}.zoom input{width:120px;accent-color:var(--azul);cursor:pointer}
+.zoom output{min-width:42px;text-align:center;font-variant-numeric:tabular-nums;color:var(--sub)}
+.zoom button{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.zoom .ico{padding:6px}#btOlhoCorte[aria-pressed="true"]{color:#ffd479}
+.linha{position:relative;height:136px;background:var(--painel);border-top:1px solid var(--linha);flex:none;user-select:none;overflow-x:auto;overflow-y:hidden;scrollbar-color:#555 var(--painel);scrollbar-width:auto}
+#trilha{position:relative;height:118px;min-width:100%;touch-action:pan-x}
+#onda{position:absolute;top:0;height:118px;display:block;pointer-events:none}
+.corte{position:absolute;top:0;bottom:22px;background:rgba(10,132,255,.42);border-left:2px solid #4aa3ff;border-right:2px solid #4aa3ff;cursor:grab;touch-action:none}
+.corte:hover{background:rgba(10,132,255,.55)}
+.corte.sel{background:rgba(10,132,255,.62);box-shadow:inset 0 0 0 1px #9ccaff}
+.corte .pega{position:absolute;top:0;bottom:0;width:11px;cursor:ew-resize}
+.corte .pega.e{left:-6px}.corte .pega.d{right:-6px}
+.corte.curto .pega,.corte.curto .x{display:none}
+.corte .x{position:absolute;top:4px;right:5px;background:rgba(0,0,0,.72);border-radius:6px;padding:1px 6px;font-size:11px;cursor:pointer;opacity:0}
+.corte:hover .x{opacity:1}
+.corte .olho{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;padding:0;display:flex;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.55);border-radius:50%;cursor:pointer;color:#dfe9f5}
+.corte .olho:hover{background:rgba(0,0,0,.8);color:#fff}
+.corte.espiando{background:repeating-linear-gradient(135deg,rgba(10,132,255,.18) 0 7px,rgba(10,132,255,.32) 7px 14px);
+  border-color:#7bb8ff}
+.corte.espiando .olho{color:#ffd479}
+header button.ico{padding:6px 8px}
+header button.ico:disabled{opacity:.32;cursor:default}
+#agulha{position:absolute;top:0;bottom:0;width:2px;background:#ff453a;pointer-events:none;z-index:5}
+.dica{color:var(--sub);font-size:12px;padding:6px 20px 10px;flex:none}
+.aviso{position:fixed;left:50%;top:14px;transform:translateX(-50%);background:var(--painel2);border:1px solid var(--linha);
+  border-radius:12px;padding:10px 16px;font-size:13px;box-shadow:0 12px 40px rgba(0,0,0,.6);z-index:20;display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:30}
+.modal.on{display:flex}
+.modal .cx{background:var(--painel);border:1px solid var(--linha);border-radius:18px;padding:22px 24px;max-width:430px}
+.modal h2{margin:0 0 8px;font-size:17px}.modal p{margin:0 0 16px;color:var(--sub);font-size:13px;line-height:1.5}
+.modal .bts{display:flex;gap:10px;justify-content:flex-end}
+</style></head><body>
+<svg style="display:none" aria-hidden="true">
+ <defs><g id="_s" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></g></defs>
+ <symbol id="i-voltar" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-desfazer" viewBox="0 0 24 24"><path d="M4 9h11a5 5 0 010 10h-6M4 9l4-4M4 9l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-salvar" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z M9 4v5h6V4 M8 13h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-olho" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+ <symbol id="i-olho-off" viewBox="0 0 24 24"><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M9.6 6.1A9.6 9.6 0 0112 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 01-3.4 4.1M6.7 8A17 17 0 002.5 12S6 18.5 12 18.5c1 0 1.9-.2 2.8-.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+ <symbol id="i-refazer" viewBox="0 0 24 24"><path d="M20 9H9a5 5 0 000 10h6M20 9l-4-4M20 9l-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-render" viewBox="0 0 24 24"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v3h16v-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"/></symbol>
+ <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 4.5h3.2v15H8zM12.8 4.5H16v15h-3.2z" fill="currentColor"/></symbol>
+ <symbol id="i-broll" viewBox="0 0 24 24"><rect x="2.8" y="5" width="18.4" height="14" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 5v14M16 5v14M2.8 12h18.4" stroke="currentColor" stroke-width="1.2" opacity=".7"/></symbol>
+ <symbol id="i-texto" viewBox="0 0 24 24"><path d="M5 6.5V5h14v1.5M12 5v14M9 19h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-som" viewBox="0 0 24 24"><path d="M4 11v2M8 8v8M12 5v14M16 9v6M20 11v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+ <symbol id="i-escuro" viewBox="0 0 24 24"><path d="M19 14.5A7.5 7.5 0 019.5 5a7.5 7.5 0 109.5 9.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+ <symbol id="i-pb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5a8.5 8.5 0 000 17z" fill="currentColor"/></symbol>
+ <symbol id="i-legenda" viewBox="0 0 24 24"><rect x="2.8" y="5.5" width="18.4" height="13" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 14h4M13 14h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+ <symbol id="i-efeitos" viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+ <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+ <symbol id="i-lupa-mais" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.4 15.4L20 20M8 10.5h5M10.5 8v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+ <symbol id="i-lupa-menos" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.4 15.4L20 20M8 10.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+ <symbol id="i-erro" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+ <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.5 6.5V4.5h5v2M6.5 6.5l1 13h9l1-13M10 10v6M14 10v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-trocar" viewBox="0 0 24 24"><path d="M4 8h12l-3-3M20 16H8l3 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-enquadrar" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/><rect x="3" y="8.5" width="18" height="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 10.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+ <symbol id="i-baixar" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7 10.5l5 5 5-5M4.5 18.5h15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<header>
+  <a class="volta" href="/#kanban" id="voltar"><svg class="ic"><use href="#i-voltar"/></svg>Kanban</a>
+  <h1 id="titulo">Revisar cortes</h1>
+  <span class="t" id="resumo"></span>
+  <div class="esp"></div>
+  <button id="btDesfazer" class="ico" title="Desfazer (⌘Z)" disabled><svg class="ic"><use href="#i-desfazer"/></svg></button>
+  <button id="btRefazer" class="ico" title="Refazer (⇧⌘Z)" disabled><svg class="ic"><use href="#i-refazer"/></svg></button>
+  <button id="btPreview"><svg class="ic"><use href="#i-olho"/></svg>Ver sem os cortes</button>
+  <a id="btBaixar" href="#" download hidden><svg class="ic"><use href="#i-baixar"/></svg>Baixar vídeo cortado</a>
+  <button class="pri" id="btSalvar"><svg class="ic"><use href="#i-salvar"/></svg>Salvar</button>
+</header>
+<div class="palco"><video id="v" playsinline></video></div>
+<div class="barra">
+  <button id="btPlay" class="ico"><svg class="ic g"><use href="#i-play"/></svg></button>
+  <span class="t" id="tempo">0:00 / 0:00</span>
+  <span class="cinza" id="st" style="color:var(--sub)"></span>
+  <div class="zoom" role="group" aria-label="Zoom da timeline">
+    <button id="btOlhoCorte" disabled aria-pressed="false" title="Selecione um trecho azul para ver o que foi cortado"><svg class="ic"><use href="#i-olho"/></svg><span>Ver corte selecionado</span></button>
+    <label for="zoom">Zoom</label>
+    <button id="btZoomMenos" class="ico" aria-label="Diminuir zoom" title="Diminuir zoom"><svg class="ic"><use href="#i-lupa-menos"/></svg></button>
+    <input id="zoom" type="range" min="0" max="100" value="0" step="1" aria-label="Zoom da timeline">
+    <button id="btZoomMais" class="ico" aria-label="Aumentar zoom" title="Aumentar zoom"><svg class="ic"><use href="#i-lupa-mais"/></svg></button>
+    <output id="zoomValor" for="zoom">1×</output>
+    <button id="btAjustar" title="Mostrar o vídeo inteiro na timeline">Ajustar</button>
+  </div>
+</div>
+<div class="linha" id="linha" aria-label="Timeline de cortes"><div id="trilha"><canvas id="onda"></canvas><div id="agulha"></div></div></div>
+<p class="dica">Em azul, o que sai do vídeo. Arraste as bordas para tirar mais ou menos, clique no ✕ para devolver o
+  trecho, ou arraste o bloco inteiro. A prévia pula o que está em azul — é o corte final. Clique no olho (ou tecle
+  <b>O</b>) para abrir um trecho e ver o que foi cortado ali: é só na prévia, o corte continua valendo no render.
+  Use o <b>zoom</b> para ampliar os cortes pequenos e role a timeline para os lados. <b>Ajustar</b> mostra o vídeo inteiro.
+  <b>⌘Z</b> desfaz.</p>
+<div class="aviso" id="aviso"></div>
+<div class="modal" id="mrev"><div class="cx">
+  <h2>Salvo. Considerar revisado?</h2>
+  <p>O corte foi aplicado com sucesso. Depois de conferir a prévia, você pode marcar como revisado para seguir à edição.</p>
+  <div class="bts"><button onclick="fecha(false)">Ainda não</button><button class="pri" onclick="fecha(true)">Considerar revisado</button></div>
+</div></div>
+<script>
+const $=s=>document.querySelector(s),U=new URLSearchParams(location.search);
+const P=U.get("p"),V=U.get("v")||"A",CARD=U.get("k");
+let D=null,SEGS=[],sel=-1,pulando=true,arrasto=null,salvando=false;
+let ZOOM=1,larguraVista=0,quadroDesenho=0;
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
+const esc=s=>String(s??"").replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
+function f(p){return "/f?p="+encodeURIComponent(p)}
+// Olho aberto = o corte vale (a prévia pula o trecho). Olho fechado = só para você espiar o que foi cortado;
+// não muda o corte nem o render — para tirar o corte de verdade é o ✕.
+const ESPIANDO=new Set(), chave=([a,b])=>a.toFixed(2)+":"+b.toFixed(2);
+const espiando=t=>ESPIANDO.has(chave(t));
+let HIST=[],POS=-1;
+function avisa(t,ms=2600){const a=$("#aviso");a.textContent=t;a.style.display="block";clearTimeout(a._t);a._t=setTimeout(()=>a.style.display="none",ms)}
+
+async function carregar(){
+  D=await (await fetch(`/api/cortes?p=${encodeURIComponent(P)}&v=${V}`)).json();
+  if(D.erro){avisa(D.erro,8000);return}
+  SEGS=D.segs.map(s=>[...s]);
+  $("#titulo").textContent=`Revisar cortes · ${D.nome}`;
+  $("#v").src=f(D.proxy);
+  if(CARD)$("#voltar").href="/#kanban";else{$("#voltar").href="/";$("#voltar").lastChild.textContent="Vídeos"}
+  $("#btBaixar").href=D.jc?f(D.jc):"#";$("#btBaixar").hidden=!D.jc;
+  HIST=[JSON.stringify(SEGS)];POS=0;
+  desenha();
+  if(D.job?.rodando){bloqueia(true);vigia()}
+}
+// ---------- desenho
+// A trilha é larga, mas o canvas cobre só a janela visível, mesmo no zoom máximo.
+function larguraTrilha(){return Math.max(1,$("#linha").clientWidth)*ZOOM}
+function zoomMaximo(){return D?Math.max(1,Math.min(2048,D.dur*960/Math.max(1,$("#linha").clientWidth))):1}
+function px(t){return t/D.dur*larguraTrilha()}
+function tempoDe(x){return Math.max(0,Math.min(D.dur,(x+$("#linha").scrollLeft)/larguraTrilha()*D.dur))}
+function preparaTrilha(){
+  larguraVista=$("#linha").clientWidth;
+  $("#trilha").style.width=larguraTrilha()+"px";
+}
+function mudaZoom(valor,alvo=null,posicao=null){
+  if(!D||arrasto)return;
+  const L=$("#linha"),w=L.clientWidth,escolhido=removidos()[sel];
+  if(alvo===null){
+    const agulha=px($("#v").currentTime)-L.scrollLeft;
+    alvo=escolhido?(escolhido[0]+escolhido[1])/2:(agulha>=0&&agulha<=w?$("#v").currentTime:tempoDe(w/2));
+  }
+  if(posicao===null){const antes=px(alvo)-L.scrollLeft;posicao=antes>=24&&antes<=w-24?antes:w/2}
+  ZOOM=Math.max(1,Math.min(zoomMaximo(),valor));
+  preparaTrilha();L.scrollLeft=Math.max(0,px(alvo)-posicao);desenha();
+}
+function controlesZoom(fora){
+  const max=zoomMaximo(),trecho=fora[sel],esp=trecho&&espiando(trecho),bt=$("#btOlhoCorte");
+  $("#zoom").value=max>1?Math.log(ZOOM)/Math.log(max)*100:0;
+  $("#zoom").setAttribute("aria-valuetext",`${ZOOM.toLocaleString("pt-BR",{maximumFractionDigits:1})} vezes`);
+  $("#zoomValor").textContent=ZOOM.toLocaleString("pt-BR",{maximumFractionDigits:1})+"×";
+  $("#btZoomMenos").disabled=ZOOM<=1;$("#btZoomMais").disabled=ZOOM>=max-.001;
+  $("#btAjustar").disabled=ZOOM<=1;$("#zoom").disabled=max<=1;
+  bt.disabled=!trecho||salvando;bt.setAttribute("aria-pressed",esp?"true":"false");
+  bt.querySelector("use").setAttribute("href",esp?"#i-olho-off":"#i-olho");
+  bt.querySelector("span").textContent=esp?"Voltar a pular o corte":"Ver corte selecionado";
+  bt.title=trecho?`${fmt(trecho[0])} a ${fmt(trecho[1])} · só altera a prévia`:"Selecione um trecho azul para ver o que foi cortado";
+}
+function passoRegua(){
+  const alvo=80*D.dur/larguraTrilha(),base=10**Math.floor(Math.log10(alvo));
+  return [1,2,5,10].find(n=>n*base>=alvo)*base;
+}
+function rotuloRegua(t,passo){
+  if(passo>=1)return fmt(t);
+  const casas=Math.min(3,Math.max(1,-Math.floor(Math.log10(passo))));
+  return `${Math.floor(t/60)}:${(t%60).toFixed(casas).padStart(3+casas,"0")}`;
+}
+function redesenhaDepois(){if(!quadroDesenho)quadroDesenho=requestAnimationFrame(()=>{quadroDesenho=0;if(D)desenha()})}
+function removidos(){                                   // o que NÃO está em SEGS
+  const fora=[];let t=0;
+  for(const [a,b] of SEGS.slice().sort((x,y)=>x[0]-y[0])){if(a-t>0.02)fora.push([t,a]);t=Math.max(t,b)}
+  if(D.dur-t>0.02)fora.push([t,D.dur]);
+  return fora;
+}
+function desenha(){
+  if(!D)return;
+  preparaTrilha();
+  const L=$("#linha"),T=$("#trilha"),w=L.clientWidth,h=T.clientHeight,c=$("#onda"),r=devicePixelRatio||1,rolagem=L.scrollLeft,largura=larguraTrilha();
+  c.style.left=rolagem+"px";c.style.width=w+"px";
+  if(c.width!==Math.round(w*r)||c.height!==Math.round(h*r)){c.width=Math.round(w*r);c.height=Math.round(h*r)}
+  const x=c.getContext("2d");x.setTransform(r,0,0,r,0,0);x.clearRect(0,0,w,h);
+  x.fillStyle="#3a3a3c";const n=D.picos.length,passo=Math.max(1,Math.floor(n/largura));
+  const primeiro=Math.max(0,Math.floor(rolagem/largura*n/passo)*passo),ultimo=Math.min(n,Math.ceil((rolagem+w)/largura*n));
+  for(let i=primeiro;i<ultimo;i+=passo){let m=0;for(let k=i;k<Math.min(n,i+passo);k++)m=Math.max(m,D.picos[k]);
+    const xx=i/n*largura-rolagem,hh=Math.max(1,m*(h-32));x.fillRect(xx,(h-32-hh)/2+6,Math.max(1,largura/n*passo),hh)}
+  x.fillStyle="#6e6e73";x.font="10px -apple-system";
+  const escala=passoRegua(),inicio=tempoDe(0),fim=tempoDe(w);
+  for(let j=Math.floor(inicio/escala);j*escala<=fim;j++){const s=j*escala,xx=px(s)-rolagem;
+    x.fillRect(xx,h-17,1,6);x.fillText(rotuloRegua(s,escala),xx+3,h-3)}
+  T.querySelectorAll(".corte").forEach(e=>e.remove());
+  const fora=removidos();
+  fora.forEach(([a,b],i)=>{
+    if(b<inicio||a>fim)return;
+    const esp=espiando([a,b]),larg=Math.max(3,px(b-a));
+    const d=document.createElement("div");d.className="corte"+(larg<28?" curto":"")+(i==sel?" sel":"")+(esp?" espiando":"");
+    d.style.left=px(a)+"px";d.style.width=larg+"px";d.dataset.i=i;
+    const olho=larg>=28?`<button type="button" class="olho" aria-label="${esp?"Voltar a pular este trecho":"Ver o que foi cortado aqui"}" aria-pressed="${esp}" title="${esp?"voltar a pular este trecho":"ver o que foi cortado aqui"}"><svg class="ic" style="width:14px;height:14px;pointer-events:none"><use href="#i-olho${esp?"-off":""}"/></svg></button>`:"";
+    d.innerHTML=`<div class="pega e"></div><div class="pega d"></div>${olho}<span class="x" title="devolver este trecho"><svg class="ic" style="width:12px;height:12px"><use href="#i-erro"/></svg></span>`;
+    T.appendChild(d)});
+  $("#agulha").style.left=px($("#v").currentTime)+"px";
+  const tot=SEGS.reduce((s,[a,b])=>s+b-a,0),esp=fora.filter(espiando).length;
+  $("#resumo").textContent=`${fora.length} corte(s) · fica ${fmt(tot)} de ${fmt(D.dur)}`
+    + (esp?` · ${esp} aberto(s) para ver`:"");
+  $("#btDesfazer").disabled=salvando||POS<=0; $("#btRefazer").disabled=salvando||POS>=HIST.length-1;
+  controlesZoom(fora);
+}
+$("#btZoomMais").onclick=()=>mudaZoom(ZOOM*2);
+$("#btZoomMenos").onclick=()=>mudaZoom(ZOOM/2);
+$("#btAjustar").onclick=()=>mudaZoom(1);
+$("#zoom").oninput=e=>mudaZoom(zoomMaximo()**(+e.target.value/100));
+$("#btOlhoCorte").onclick=()=>{const trecho=removidos()[sel];if(trecho&&!salvando)alterna(trecho)};
+$("#linha").addEventListener("scroll",redesenhaDepois,{passive:true});
+$("#linha").addEventListener("wheel",e=>{
+  if(!D||!(e.ctrlKey||e.metaKey))return;
+  e.preventDefault();const x=e.clientX-$("#linha").getBoundingClientRect().left;
+  mudaZoom(ZOOM*Math.exp(-e.deltaY*.002),tempoDe(x),x);
+},{passive:false});
+addEventListener("resize",()=>{
+  if(!D)return;
+  const L=$("#linha"),anterior=Math.max(1,larguraVista),centro=(L.scrollLeft+anterior/2)/(anterior*ZOOM)*D.dur;
+  ZOOM=Math.min(ZOOM,zoomMaximo());preparaTrilha();L.scrollLeft=px(centro)-L.clientWidth/2;desenha();
+});
+
+// ---------- editar os cortes
+$("#linha").addEventListener("pointerdown",e=>{
+  if(!D||salvando||e.button!==0||e.target===$("#linha"))return;
+  const alvo=e.target.closest(".corte");if(!alvo){sel=-1;desenha();return}
+  const i=+alvo.dataset.i,fora=removidos();sel=i;
+  if(e.target.closest(".x")){devolve(fora[i]);registra();return}
+  if(e.target.closest(".olho"))return;
+  const modo=e.target.classList.contains("pega")?(e.target.classList.contains("e")?"e":"d"):"mover";
+  arrasto={i,modo,t0:tempoDe(e.clientX-$("#linha").getBoundingClientRect().left),orig:[...fora[i]],
+    base:fora.map(x=>[...x]),segs:SEGS.map(x=>[...x]),esp:[...ESPIANDO]};
+  $("#linha").setPointerCapture(e.pointerId);desenha();
+});
+$("#linha").addEventListener("click",e=>{
+  if(!D||salvando||!e.target.closest(".olho"))return;
+  const alvo=e.target.closest(".corte");sel=+alvo.dataset.i;
+  const trecho=removidos()[sel];if(trecho)alterna(trecho);
+});
+addEventListener("pointermove",e=>{
+  if(!arrasto)return;
+  const t=tempoDe(e.clientX-$("#linha").getBoundingClientRect().left),d=t-arrasto.t0;
+  let [a,b]=arrasto.orig;const minimo=Math.min(0.1,b-a);
+  if(arrasto.modo=="e")a=Math.min(b-minimo,a+d);else if(arrasto.modo=="d")b=Math.max(a+minimo,b+d);else{const passo=Math.max(-a,Math.min(D.dur-b,d));a+=passo;b+=passo}
+  aplica(arrasto.orig,[Math.max(0,a),Math.min(D.dur,b)],arrasto.base,arrasto.esp);
+});
+addEventListener("pointerup",()=>{if(arrasto){arrasto=null;registra()}});
+addEventListener("pointercancel",()=>{if(!arrasto)return;SEGS=arrasto.segs;ESPIANDO.clear();arrasto.esp.forEach(x=>ESPIANDO.add(x));arrasto=null;desenha()});
+function aplica(velho,novo,base=removidos(),esp=null){                            // troca um trecho removido por outro
+  const fora=base.filter(([a,b])=>!(Math.abs(a-velho[0])<1e-6&&Math.abs(b-velho[1])<1e-6));
+  if(esp){ESPIANDO.clear();esp.forEach(x=>ESPIANDO.add(x))}
+  if(ESPIANDO.delete(chave(velho)))ESPIANDO.add(chave(novo));   // o olho segue o trecho enquanto você arrasta
+  fora.push(novo);refaz(fora);
+}
+function devolve(trecho){ESPIANDO.delete(chave(trecho));
+  refaz(removidos().filter(([a,b])=>!(Math.abs(a-trecho[0])<1e-6&&Math.abs(b-trecho[1])<1e-6)));sel=-1}
+function alterna(trecho){const k=chave(trecho);
+  ESPIANDO.has(k)?ESPIANDO.delete(k):ESPIANDO.add(k);desenha();
+  avisa(ESPIANDO.has(k)?"trecho aberto: a prévia passa por ele. O corte continua valendo no render."
+                      :"trecho fechado de novo: a prévia volta a pular")}
+
+// ---------- desfazer / refazer (só o que muda os cortes; o olho é de visualização)
+function registra(){
+  const e=JSON.stringify(SEGS);
+  if(POS>=0&&HIST[POS]===e)return;
+  HIST=HIST.slice(0,POS+1);HIST.push(e);POS=HIST.length-1;desenha();
+}
+function anda(d){
+  if(salvando)return;
+  const n=POS+d;if(n<0||n>=HIST.length)return;
+  POS=n;SEGS=JSON.parse(HIST[POS]).map(x=>[...x]);sel=-1;desenha();
+  avisa(d<0?"desfeito":"refeito",1400);
+}
+$("#btDesfazer").onclick=()=>anda(-1);
+$("#btRefazer").onclick=()=>anda(1);
+function refaz(fora){                                   // remontar SEGS a partir dos removidos
+  fora=fora.slice().sort((x,y)=>x[0]-y[0]);
+  const s=[];let t=0;
+  for(const [a,b] of fora){if(a-t>0.05)s.push([t,Math.min(a,D.dur)]);t=Math.max(t,b)}
+  if(D.dur-t>0.05)s.push([t,D.dur]);
+  if(!s.length){avisa("É preciso manter pelo menos um trecho de fala.");return}
+  SEGS=s;desenha();
+}
+
+// ---------- prévia pulando os cortes
+const v=$("#v");
+$("#btPlay").onclick=()=>v.paused?v.play():v.pause();
+const icoP=t=>$("#btPlay").innerHTML=`<svg class="ic g"><use href="#i-${t}"/></svg>`;
+v.addEventListener("play",()=>icoP("pause"));v.addEventListener("pause",()=>icoP("play"));
+$("#btPreview").onclick=()=>{pulando=!pulando;$("#btPreview").textContent=pulando?"Ver sem os cortes":"Ver o vídeo inteiro";
+  avisa(pulando?"a prévia pula o que está em azul":"tocando o vídeo original inteiro")};
+v.addEventListener("timeupdate",()=>{
+  if(!D)return;const t=v.currentTime;
+  $("#tempo").textContent=`${fmt(t)} / ${fmt(D.dur)}`;
+  $("#agulha").style.left=px(t)+"px";
+  if(!v.paused&&!arrasto&&ZOOM>1){
+    const L=$("#linha"),x=px(t)-L.scrollLeft;
+    if(x<0||x>L.clientWidth-12)L.scrollLeft=Math.max(0,px(t)-L.clientWidth*.15);
+  }
+  if(!pulando||v.paused)return;
+  for(const tr of removidos()){const [a,b]=tr;
+    if(!espiando(tr)&&t>=a-0.02&&t<b-0.05){v.currentTime=b+0.001;return}}
+});
+$("#linha").addEventListener("dblclick",e=>{
+  if(D&&!e.target.closest(".olho,.x,.pega"))v.currentTime=tempoDe(e.clientX-$("#linha").getBoundingClientRect().left);
+});
+
+// ---------- salvar
+function bloqueia(valor){salvando=valor;$("#btSalvar").disabled=valor;if(D)desenha()}
+async function resposta(r){const j=await r.json();if(!r.ok||j.erro)throw new Error(j.erro||"Não foi possível concluir a operação.");return j}
+$("#btSalvar").onclick=async()=>{
+  if(salvando)return;
+  bloqueia(true);$("#st").textContent="refazendo o corte…";
+  try{
+    const j=await resposta(await fetch("/api/cortes/salvar",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({p:P,v:V,segs:SEGS,card:CARD,revisado:false,revisao:D.revisao})}));
+    D.revisao=j.revisao;vigia();
+  }catch(e){avisa(e.message,6000);$("#st").textContent=e.message;bloqueia(false)}
+};
+async function fecha(revisado){
+  if(revisado&&CARD){
+    try{
+      await resposta(await fetch("/api/kanban/revisado",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({id:CARD,valor:true,p:P,v:V,revisao:D.revisao})}));
+      avisa("marcado como revisado no quadro");
+    }catch(e){avisa(e.message,6000);return}
+  }
+  $("#mrev").classList.remove("on");
+}
+async function vigia(){
+  try{
+    const j=await resposta(await fetch("/api/cortes?p="+encodeURIComponent(P)+"&v="+encodeURIComponent(V)));
+    const job=j.job;
+    if(job?.rodando){$("#st").textContent="refazendo o corte…";setTimeout(vigia,2500);return}
+    bloqueia(false);
+    if(!job||job.erro){$("#st").textContent=job?.erro?("erro: "+job.erro.slice(0,200)):"Não foi possível confirmar a aplicação dos cortes. Recarregue a página.";return}
+    if(job.revisao!==j.revisao){$("#st").textContent="Os cortes mudaram durante o processamento. Recarregue e confira.";return}
+    $("#st").textContent="corte aplicado";D.segs=j.segs;D.revisao=j.revisao;D.jc=j.jc;
+    $("#btBaixar").href=D.jc?f(D.jc)+"&t="+Date.now():"#";$("#btBaixar").hidden=!D.jc;
+    if(CARD)$("#mrev").classList.add("on");
+  }catch(e){$("#st").textContent="Falha ao consultar o corte: "+e.message;setTimeout(vigia,4000)}
+}
+document.onkeydown=e=>{
+  if(e.target.matches("input,textarea,select")||e.target.isContentEditable)return;
+  if(e.key==" "&&e.target.closest("button"))return;
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()=="z"){e.preventDefault();anda(e.shiftKey?1:-1);return}
+  if(e.key==" "){e.preventDefault();v.paused?v.play():v.pause()}
+  if(e.key.toLowerCase()=="o"&&sel>=0){const fora=removidos();if(fora[sel])alterna(fora[sel])}
+  if(e.key=="Escape")$("#mrev").classList.remove("on")};
+carregar();
+</script></body></html>

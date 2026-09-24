@@ -1,0 +1,306 @@
+[
+ {
+  "arquivo": "pxb-whoosh-simple.wav",
+  "nome": "Whoosh curto",
+  "categoria": "Whoosh / swoosh",
+  "uso": "entrada de texto",
+  "dur": 0.57,
+  "ataque": 0.16
+ },
+ {
+  "arquivo": "pxb-swipe-whoosh3.wav",
+  "nome": "Whoosh deslizando",
+  "categoria": "Whoosh / swoosh",
+  "uso": "entrada de texto",
+  "dur": 1.04,
+  "ataque": 0.16
+ },
+ {
+  "arquivo": "pxb-whoosh-effect.wav",
+  "nome": "Whoosh seco",
+  "categoria": "Whoosh / swoosh",
+  "uso": "entrada de texto, zoom",
+  "dur": 0.57,
+  "ataque": 0.15
+ },
+ {
+  "arquivo": "pxb-swipe-whoosh1.wav",
+  "nome": "Whoosh rápido",
+  "categoria": "Whoosh / swoosh",
+  "uso": "entrada de texto",
+  "dur": 1.52,
+  "ataque": 0.09
+ },
+ {
+  "arquivo": "pxb-swoosh-015.wav",
+  "nome": "Swoosh longo",
+  "categoria": "Whoosh / swoosh",
+  "uso": "B-roll deslizando para a tela",
+  "dur": 1.06,
+  "ataque": 0.5
+ },
+ {
+  "arquivo": "pxb-fast-whoosh.wav",
+  "nome": "Whoosh de transição",
+  "categoria": "Whoosh / swoosh",
+  "uso": "B-roll deslizando para a tela",
+  "dur": 1.2,
+  "ataque": 0.55
+ },
+ {
+  "arquivo": "synth-whoosh.wav",
+  "nome": "Whoosh sintético",
+  "categoria": "Whoosh / swoosh",
+  "uso": "gerado aqui",
+  "dur": 0.5,
+  "ataque": 0.26
+ },
+ {
+  "arquivo": "synth-whoosh-curto.wav",
+  "nome": "Whoosh sintético curto",
+  "categoria": "Whoosh / swoosh",
+  "uso": "gerado aqui",
+  "dur": 0.32,
+  "ataque": 0.15
+ },
+ {
+  "arquivo": "pxb-pop2-dragon.wav",
+  "nome": "Pop suave",
+  "categoria": "Pop",
+  "uso": "palavra-chave pipocando",
+  "dur": 0.72,
+  "ataque": 0.12
+ },
+ {
+  "arquivo": "pxb-bubblepop06.wav",
+  "nome": "Pop bolha",
+  "categoria": "Pop",
+  "uso": "palavra-chave pipocando",
+  "dur": 1.06,
+  "ataque": 0.12
+ },
+ {
+  "arquivo": "sfx-pop.wav",
+  "nome": "Pop estalo",
+  "categoria": "Pop",
+  "uso": "ícone pequeno, palavra-chave",
+  "dur": 0.6,
+  "ataque": 0.33
+ },
+ {
+  "arquivo": "pxb-pop-dragon.wav",
+  "nome": "Pop forte",
+  "categoria": "Pop",
+  "uso": "palavra-chave pipocando",
+  "dur": 0.72,
+  "ataque": 0.2
+ },
+ {
+  "arquivo": "sfx-click.wav",
+  "nome": "Clique de mouse",
+  "categoria": "Clique / interface",
+  "uso": "CTA 'toque aqui abaixo'",
+  "dur": 3.07,
+  "ataque": 1.05
+ },
+ {
+  "arquivo": "pxb-ding.wav",
+  "nome": "Ding de confirmação",
+  "categoria": "Ding / sino",
+  "uso": "check ✅, conquista",
+  "dur": 1.13,
+  "ataque": 0.1
+ },
+ {
+  "arquivo": "sfx-correto.wav",
+  "nome": "Correto",
+  "categoria": "Ding / sino",
+  "uso": "check ✅",
+  "dur": 1.44,
+  "ataque": 0.13
+ },
+ {
+  "arquivo": "sfx-sininho.wav",
+  "nome": "Sininho",
+  "categoria": "Ding / sino",
+  "uso": "autoridade, formatura",
+  "dur": 2.88,
+  "ataque": 0.1
+ },
+ {
+  "arquivo": "sfx-notificac-a-o.wav",
+  "nome": "Notificação",
+  "categoria": "Ding / sino",
+  "uso": "notificação de celular",
+  "dur": 1.3,
+  "ataque": 0.29
+ },
+ {
+  "arquivo": "pxb-zap.wav",
+  "nome": "Choque elétrico",
+  "categoria": "Zap / energia",
+  "uso": "marca, logo com raio",
+  "dur": 0.78,
+  "ataque": 0.33
+ },
+ {
+  "arquivo": "pxb-zap-hit.wav",
+  "nome": "Zap com impacto",
+  "categoria": "Zap / energia",
+  "uso": "marca com mais peso",
+  "dur": 1.22,
+  "ataque": 0.14
+ },
+ {
+  "arquivo": "pxb-levelup.wav",
+  "nome": "Power-up (sobe)",
+  "categoria": "Power-up / ganho",
+  "uso": "ganho, testosterona subindo",
+  "dur": 1.32,
+  "ataque": 0.34
+ },
+ {
+  "arquivo": "pxb-powerup.wav",
+  "nome": "Power-up grave",
+  "categoria": "Power-up / ganho",
+  "uso": "evolução, benefício",
+  "dur": 1.7,
+  "ataque": 0.15
+ },
+ {
+  "arquivo": "pxb-subboom.wav",
+  "nome": "Boom grave (sub-drop)",
+  "categoria": "Impacto",
+  "uso": "celebridade, antes e depois, modo escuro",
+  "dur": 3.76,
+  "ataque": 0.65
+ },
+ {
+  "arquivo": "pxb-impact-hit.wav",
+  "nome": "Impacto cinematográfico",
+  "categoria": "Impacto",
+  "uso": "número grande, zoom",
+  "dur": 3.05,
+  "ataque": 0.17
+ },
+ {
+  "arquivo": "sfx-impacto.wav",
+  "nome": "Impacto longo",
+  "categoria": "Impacto",
+  "uso": "revelação",
+  "dur": 12.36,
+  "ataque": 0.1
+ },
+ {
+  "arquivo": "synth-boom.wav",
+  "nome": "Boom sintético",
+  "categoria": "Impacto",
+  "uso": "gerado aqui",
+  "dur": 1.2,
+  "ataque": 0.01
+ },
+ {
+  "arquivo": "pxb-vhs-glitch.wav",
+  "nome": "Glitch de VHS",
+  "categoria": "Glitch / estática",
+  "uso": "arquivo antigo, 'método velho'",
+  "dur": 1.27,
+  "ataque": 0.11
+ },
+ {
+  "arquivo": "pxb-ui-interface.wav",
+  "nome": "Bipes de interface",
+  "categoria": "Tecnológico / ciência",
+  "uso": "anatomia, gráfico, método",
+  "dur": 2.16,
+  "ataque": 0.25
+ },
+ {
+  "arquivo": "pxb-ui-scan.wav",
+  "nome": "Scan",
+  "categoria": "Tecnológico / ciência",
+  "uso": "análise, IMC",
+  "dur": 2.43,
+  "ataque": 0.33
+ },
+ {
+  "arquivo": "sfx-loading.wav",
+  "nome": "Carregando",
+  "categoria": "Tecnológico / ciência",
+  "uso": "processamento",
+  "dur": 13.86,
+  "ataque": 3.97
+ },
+ {
+  "arquivo": "sfx-cronometro-rapido.wav",
+  "nome": "Tique-taque acelerado",
+  "categoria": "Relógio / tempo",
+  "uso": "relógio na tela, urgência",
+  "dur": 1.87,
+  "ataque": 0.53
+ },
+ {
+  "arquivo": "sfx-cronometro.wav",
+  "nome": "Cronômetro",
+  "categoria": "Relógio / tempo",
+  "uso": "tempo passando",
+  "dur": 13.26,
+  "ataque": 6.8
+ },
+ {
+  "arquivo": "sfx-escrevendo.wav",
+  "nome": "Caneta no papel",
+  "categoria": "Escrita",
+  "uso": "prancheta, plano personalizado",
+  "dur": 3.14,
+  "ataque": 3.07
+ },
+ {
+  "arquivo": "pxb-laugh-sitcom.wav",
+  "nome": "Risada de plateia",
+  "categoria": "Humor",
+  "uso": "cena cômica, ridicularizar a dor",
+  "dur": 3.97,
+  "ataque": 0.98
+ },
+ {
+  "arquivo": "pxb-riser-small.wav",
+  "nome": "Riser curto",
+  "categoria": "Tensão / riser",
+  "uso": "antes de revelação",
+  "dur": 3.08,
+  "ataque": 0.98
+ },
+ {
+  "arquivo": "synth-shimmer.wav",
+  "nome": "Brilho",
+  "categoria": "Tensão / riser",
+  "uso": "gerado aqui",
+  "dur": 0.6,
+  "ataque": 0.3
+ },
+ {
+  "arquivo": "pxb-shutter.wav",
+  "nome": "Obturador de câmera",
+  "categoria": "Transição",
+  "uso": "flash, foto",
+  "dur": 0.99,
+  "ataque": 0.15
+ },
+ {
+  "arquivo": "sfx-lens-flare.wav",
+  "nome": "Lens flare",
+  "categoria": "Transição",
+  "uso": "brilho, flash",
+  "dur": 0.86,
+  "ataque": 0.4
+ },
+ {
+  "arquivo": "sfx-slice-ring.wav",
+  "nome": "Corte metálico",
+  "categoria": "Transição",
+  "uso": "corte seco, espada",
+  "dur": 3.0,
+  "ataque": 0.51
+ }
+]

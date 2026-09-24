@@ -1,0 +1,206 @@
+{
+ "nome": "Ugly",
+ "descricao": "Estilo direto de anúncio educacional: anatomia e cotidiano em cheia, apresentador na dividida, legenda central fixa e ênfase laranja. Ritmo editorial mediano de 2,3 s.",
+ "fontes": {
+  "sans": {
+   "arquivo": "fontes/AvenirNext-Bold.ttf",
+   "indice": 0,
+   "css": "700 {px}px \"Avenir Next\""
+  }
+ },
+ "letreiro": {
+  "entrada": 0.1,
+  "largura_max": 0.88,
+  "topo_padrao": 0.32,
+  "estilos": {
+   "branca": {
+    "rotulo": "Branca",
+    "familia": "sans",
+    "px": 100,
+    "cor": [
+     255,
+     255,
+     255
+    ],
+    "tracking": -0.02,
+    "efeito": "sombra"
+   },
+   "laranja": {
+    "rotulo": "Ênfase laranja",
+    "familia": "sans",
+    "px": 110,
+    "cor": [
+     255,
+     112,
+     0
+    ],
+    "tracking": -0.02,
+    "efeito": "sombra"
+   },
+   "dia": {
+    "rotulo": "Marco temporal",
+    "familia": "sans",
+    "px": 125,
+    "cor": [
+     255,
+     112,
+     0
+    ],
+    "tracking": -0.03,
+    "efeito": "sombra"
+   }
+  },
+  "efeitos": {
+   "sombra": [
+    [
+     0,
+     0,
+     0,
+     1,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0.85,
+     4,
+     2
+    ]
+   ]
+  }
+ },
+ "legenda": {
+  "familia": "sans",
+  "tam": 111,
+  "pad": 30,
+  "x": 0.5,
+  "y": 0.48,
+  "max_palavras": 3,
+  "max_caracteres": 18,
+  "sombras": [
+   [
+    0,
+    0,
+    0,
+    1,
+    2,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0.85,
+    4,
+    2
+   ]
+  ],
+  "tracking": -0.02,
+  "segura": 0.18,
+  "dividida_dy": 0
+ },
+ "zoom": {
+  "alterna": [
+   1,
+   1.025
+  ],
+  "punch": 0.035,
+  "estilos_punch": [
+   "laranja",
+   "dia"
+  ],
+  "ancora": [
+   0.5,
+   0.45
+  ],
+  "escuro_push": 0,
+  "min_movimento": 2.3,
+  "punch_subida": 0.12,
+  "punch_intervalo": 2.3
+ },
+ "transicao": {
+  "entrada": 0.1,
+  "saida": 0.1
+ },
+ "cheia": {
+  "push": 0.02
+ },
+ "dividida": {
+  "escurece_antes": 0,
+  "folga_cabeca": 0.035,
+  "fusao": 60
+ },
+ "origem": "claude",
+ "regras": {
+  "min_dur": {
+   "cheia": 0.73,
+   "dividida": 1.5
+  },
+  "respiro": 0.8,
+  "encadeia": [
+   [
+    "dividida",
+    "cheia"
+   ],
+   [
+    "cheia",
+    "cheia"
+   ],
+   [
+    "cheia",
+    "dividida"
+   ]
+  ],
+  "max_encadeadas": 8,
+  "letreiro_sobre_broll": true,
+  "empilha_ok_emoji": [],
+  "letreiro_apos_broll": 0,
+  "max_blocos_juntos": 1,
+  "linhas_max": 1,
+  "escuro_sobre_broll": false,
+  "letreiro_dur_max": 2.3,
+  "palavras_max": 3,
+  "max_sem_broll": 12,
+  "min_fora_da_cheia": 0.4
+ },
+ "conferencia": {
+  "max_sem_letreiro": 15,
+  "max_sem_broll": 12
+ },
+ "modo": "broll_primeiro",
+ "processo": [
+  {
+   "titulo": "Preparar fala",
+   "detalhe": "Transcrever preservando qualificações e montar blocos com alvo mediano de 2,3 s."
+  },
+  {
+   "titulo": "Buscar imagens",
+   "detalhe": "Selecionar anatomia pronta e cotidiano relacionados à fala conforme BUSCA.md."
+  },
+  {
+   "titulo": "Montar",
+   "detalhe": "Abrir em dividida quando pertinente, desenvolver em cheias e voltar à pessoa para apresentação e CTA. Preferir corte seco."
+  },
+  {
+   "titulo": "Aplicar texto",
+   "detalhe": "Legenda fixa a 48% da altura; destaques laranja e marcos temporais conforme o roteiro, sem colisão."
+  },
+  {
+   "titulo": "Revisar",
+   "detalhe": "Conferir ritmo, legibilidade e adaptações descritas em LEIA.md no Laboratório."
+  }
+ ],
+ "usa": {
+  "letreiro": true,
+  "formatos": [
+   "cheia",
+   "dividida"
+  ],
+  "escuro": false,
+  "pb": false,
+  "flash": false
+ },
+ "publicado": false
+}

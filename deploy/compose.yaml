@@ -1,0 +1,28 @@
+# Atlas Editor — auto-hospedagem numa VPS própria (Docker puro, sem EasyPanel).
+# Uso:
+#   cd deploy && docker compose up -d --build
+# A aplicação fica em http://SEU-SERVIDOR:4123. Coloque um proxy reverso com HTTPS
+# na frente (ver deploy/README.md) se for expor a um domínio público.
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: atlas-editor:local
+    restart: unless-stopped
+    ports:
+      - "4123:4123"
+    environment:
+      # Deixe vazio para instalação de uso pessoal (sem admin master fixo).
+      # Só preencha se você mesmo for operar workspaces separados para terceiros.
+      ATLAS_ADMIN_MASTER: "${ATLAS_ADMIN_MASTER:-}"
+    volumes:
+      - atlas_data:/var/lib/editor-ia
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4123/api/health',timeout=4).read()"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+volumes:
+  atlas_data:

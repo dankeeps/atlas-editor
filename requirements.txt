@@ -1,0 +1,8 @@
+# Ambiente único do Atlas Editor (Python 3.12).
+anthropic==1.7.0
+claude-agent-sdk==0.2.157
+faster-whisper==1.2.1
+numpy==2.5.3
+onnxruntime==1.30.0
+Pillow==12.3.0
+yt-dlp==2026.8.19

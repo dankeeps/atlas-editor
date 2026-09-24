@@ -1,0 +1,36 @@
+.git
+.venv
+__pycache__
+**/__pycache__
+*.pyc
+**/*.pyc
+modelos
+runtime
+.env*
+**/chaves.json
+**/users.json
+*.log
+.DS_Store
+# Remote release metadata and rollback snapshots are never image content.
+rollback
+request.json
+source.tar.gz
+*.tar.gz
+runtime.env
+**/runtime.env
+
+**/._*
+
+# Credenciais e pacotes locais de publicação
+**/secrets
+**/transfer
+*.pem
+*.key
+*.p12
+*.pfx
+**/*.sqlite*
+.agents
+# Nenhuma regra de .claude aqui: o Docker não sabe re-incluir uma subpasta de um diretório já excluído
+# (limitação documentada do .dockerignore), então tentar "excluir .claude, exceto .claude/skills" não
+# funciona. Quem decide o que de .claude viaja é scripts/atlas-publish.mjs (só empacota .claude/skills no
+# tar que vira o contexto de build) — aqui não tem nada pra excluir.

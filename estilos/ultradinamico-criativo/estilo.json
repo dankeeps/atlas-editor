@@ -1,0 +1,349 @@
+{
+ "nome": "Ultradinâmico Criativo",
+ "descricao": "O visual do Ultradinâmico (serifada azul, legenda no peito, 4 formatos de B-roll, modo escuro, som em cada entrada) para criativo curto, sem empilhar: um elemento por vez, formato que fica tempo suficiente na tela, respiro com a pessoa entre um B-roll e outro (só a dividida passa direto para a tela cheia) e letreiro fora do B-roll, a não ser a lista de checks.",
+ "fontes": {
+  "serif": {
+   "arquivo": "fontes/PlayfairDisplay-Italic[wght].ttf",
+   "peso": 900,
+   "css": "italic 900 {px}px PF"
+  },
+  "sans": {
+   "arquivo": "fontes/AvenirNext-Bold.ttf",
+   "indice": 0,
+   "css": "700 {px}px \"Avenir Next\""
+  },
+  "demi": {
+   "arquivo": "fontes/AvenirNext-DemiBold.ttf",
+   "indice": 0,
+   "css": "600 {px}px \"Avenir Next\""
+  }
+ },
+ "letreiro": {
+  "entrada": 0.27,
+  "largura_max": 0.88,
+  "estilos": {
+   "sans": {
+    "rotulo": "Branca pequena",
+    "familia": "sans",
+    "px": 96,
+    "cor": [
+     255,
+     255,
+     255
+    ],
+    "tracking": -0.045,
+    "efeito": "sombra"
+   },
+   "azul": {
+    "rotulo": "Azul itálica (chave)",
+    "familia": "serif",
+    "px": 215,
+    "cor": [
+     13,
+     66,
+     244
+    ],
+    "tracking": -0.035,
+    "efeito": "brilho"
+   },
+   "num": {
+    "rotulo": "Número grande",
+    "familia": "sans",
+    "px": 250,
+    "cor": [
+     255,
+     255,
+     255
+    ],
+    "tracking": -0.06,
+    "efeito": "sombra"
+   },
+   "branca": {
+    "rotulo": "Branca itálica",
+    "familia": "serif",
+    "px": 175,
+    "cor": [
+     255,
+     255,
+     255
+    ],
+    "tracking": -0.03,
+    "efeito": "sombra_forte"
+   },
+   "lista": {
+    "rotulo": "Azul itálica menor",
+    "familia": "serif",
+    "px": 150,
+    "cor": [
+     13,
+     66,
+     244
+    ],
+    "tracking": -0.03,
+    "efeito": "brilho"
+   }
+  },
+  "efeitos": {
+   "sombra": [
+    [
+     0,
+     0,
+     0,
+     0.45,
+     26,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0.6,
+     7,
+     4
+    ]
+   ],
+   "sombra_forte": [
+    [
+     0,
+     0,
+     0,
+     0.55,
+     24,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0.75,
+     8,
+     5
+    ]
+   ],
+   "brilho": [
+    [
+     0,
+     0,
+     0,
+     0.3,
+     12,
+     5
+    ],
+    [
+     215,
+     228,
+     255,
+     1.6,
+     7,
+     0
+    ]
+   ]
+  },
+  "_efeitos_formato": "cada camada: r, g, b, alfa, blur (× px/100), deslocamento y (× px/100); a última camada é sempre o texto na cor do estilo",
+  "topo_padrao": 0.12
+ },
+ "legenda": {
+  "familia": "demi",
+  "tam": 60,
+  "tracking": -0.01,
+  "pad": 30,
+  "sombras": [
+   [
+    0,
+    0,
+    0,
+    0.55,
+    14,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0.85,
+    4,
+    3
+   ]
+  ],
+  "x": 0.5,
+  "y": 0.715,
+  "max_palavras": 3,
+  "max_caracteres": 17,
+  "segura": 0.6,
+  "canto_x": [
+   0.68,
+   0.32
+  ],
+  "canto_dy": -0.195,
+  "dividida_dy": 0.215
+ },
+ "zoom": {
+  "alterna": [
+   1.0,
+   1.08
+  ],
+  "punch": 0.12,
+  "estilos_punch": [
+   "azul",
+   "num",
+   "branca"
+  ],
+  "ancora": [
+   0.5,
+   0.42
+  ],
+  "escuro_push": 0.05,
+  "min_movimento": 2.2,
+  "punch_subida": 0.16,
+  "punch_intervalo": 1.2
+ },
+ "transicao": {
+  "entrada": 0.26,
+  "saida": 0.2
+ },
+ "escuro": {
+  "entra": 0.17,
+  "sai": 0.1,
+  "centro": [
+   0.5,
+   0.4
+  ],
+  "raio": [
+   0.4,
+   0.3
+  ],
+  "piso": 0.18,
+  "forca": 0.72
+ },
+ "pb": {
+  "entra": 0.1,
+  "sai": 0.07,
+  "contraste": 1.1
+ },
+ "cheia": {
+  "push": 0.06
+ },
+ "canto": {
+  "escala": 0.6,
+  "x": [
+   0.3,
+   0.7
+  ],
+  "escurecer": 0.85,
+  "contorno": 0,
+  "sombra_blur": 18,
+  "sombra_alpha": 0.6,
+  "borda_suave": 1.5,
+  "enquadra": "busto",
+  "ar_cabeca": 0.02,
+  "topo_max": 0.5,
+  "folga_cintura": 0.05,
+  "altura_min": 0.4,
+  "cintura_por_pescoco": 2.1,
+  "busto_aprox": 0.76,
+  "margem_ombros": 0.35
+ },
+ "dividida": {
+  "escurece_antes": 0.35,
+  "folga_cabeca": 0.035,
+  "fusao": 100
+ },
+ "card": {
+  "largura_max": 0.88,
+  "altura_max": 0.46,
+  "topo": 0.075,
+  "raio": 0.07,
+  "sombra_blur": 22,
+  "sombra_alpha": 0.55,
+  "entrada": 0.22,
+  "aspecto_min": 1.0
+ },
+ "flash": {
+  "duracao": 0.1
+ },
+ "origem": "Ultradinâmico + pedido do cliente em 2026-09-19: versão para criativo, sem empilhar edição",
+ "regras": {
+  "min_dur": {
+   "canto": 3.0,
+   "dividida": 2.0,
+   "cheia": 1.2,
+   "card": 2.0
+  },
+  "respiro": 1.5,
+  "encadeia": [
+   [
+    "dividida",
+    "cheia"
+   ],
+   [
+    "cheia",
+    "cheia"
+   ]
+  ],
+  "max_encadeadas": 3,
+  "letreiro_sobre_broll": false,
+  "empilha_ok_emoji": [
+   "✅",
+   "❌"
+  ],
+  "letreiro_apos_broll": 0.6,
+  "max_blocos_juntos": 1,
+  "linhas_max": 2,
+  "escuro_sobre_broll": false,
+  "letreiro_dur_max": 4.0,
+  "palavras_max": 5,
+  "max_sem_broll": 10,
+  "min_fora_da_cheia": 0.4
+ },
+ "conferencia": {
+  "max_sem_letreiro": 8,
+  "max_sem_broll": 10
+ },
+ "modo": "broll_primeiro",
+ "processo": [
+  {
+   "titulo": "Transcreve o anúncio",
+   "detalhe": "A fala palavra por palavra, com o tempo de cada uma. Roda no Mac, sem custo."
+  },
+  {
+   "titulo": "Cortes",
+   "detalhe": "O Claude confere silêncios e erros de fala; com roteiro, fica a última tomada boa e cada lead vira uma versão."
+  },
+  {
+   "titulo": "Busca os B-rolls",
+   "detalhe": "Primeiro os clipes com a etiqueta deste anúncio (da aba Busca de B-roll), depois o resto da pasta da oferta, lendo a ficha que o Gemini fez de cada um. O Claude coloca cada clipe no momento da fala em que ele encaixa melhor, sem forçar clipe fraco."
+  },
+  {
+   "titulo": "Montagem no formato",
+   "detalhe": "Cada B-roll no formato certo (tela cheia com transição, canto, dividida, card), no melhor trecho do clipe e com o recorte da ficha. Duplo check: onde ficou tempo demais sem B-roll, outro clipe da oferta ou uma busca específica no TikTok (o Gemini estuda na hora)."
+  },
+  {
+   "titulo": "Letreiros e efeitos sonoros",
+   "detalhe": "Com os B-rolls fixados, os letreiros (palavra-chave, destaques, números, checks) e o modo escuro entram nos espaços com a pessoa; os sons entram sozinhos pelo mapa de som do modelo."
+  },
+  {
+   "titulo": "Regras do modelo",
+   "detalhe": "Conferência automática das regras do template; o que quebrar, o Claude corrige."
+  },
+  {
+   "titulo": "Conferência quadro a quadro (opcional)",
+   "detalhe": "Só se marcar em “+ Novo vídeo”: quadros reais do vídeo montado para o Claude revisar."
+  },
+  {
+   "titulo": "Render",
+   "detalhe": "O vídeo final. Os B-rolls que entraram vão para “Usados”. O que não gostar, troca no editor."
+  }
+ ],
+ "usa": {
+  "letreiro": true,
+  "formatos": [
+   "cheia",
+   "canto",
+   "dividida",
+   "card"
+  ],
+  "escuro": true,
+  "pb": true,
+  "flash": true
+ }
+}

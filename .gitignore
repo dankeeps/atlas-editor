@@ -1,0 +1,43 @@
+# ambiente Python da skill (recriável: veja SKILL.md)
+.venv/
+__pycache__/
+*.pyc
+
+# lixo do macOS e de editor
+.DS_Store
+*.swp
+*.tmp
+*.tmp.*
+
+# nada de chave aqui: elas moram em ~/.config/estudio-edicao/chaves.json
+chaves.json
+
+# amostra dos letreiros: gerada pelo motor e refeita sozinha quando o estilo muda
+estilos/*/amostra.jpg
+
+# modelos de IA: baixados da release oficial (python3 lib/matte.py --instalar)
+modelos/
+
+# Dados e credenciais nunca entram no repositório
+.env
+.env.*
+!.env.example
+runtime.env
+**/runtime.env
+users.json
+**/secrets/
+**/transfer/
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite-*
+*.log
+runtime/
+data/
+rollback/
+*.tar.gz
+.agents/
+estilos/.trava
+.claude/settings.local.json
